@@ -18,14 +18,14 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+                        使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.
                        DESC
 
-  s.homepage         = 'https://github.com/5210167@qq.com/ProgressHUDSwift'
+  s.homepage         = 'https://github.com/zhenxingliu/ProgressHUDSwift'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '5210167@qq.com' => '5210167@qq.com' }
-  s.source           = { :git => 'https://github.com/5210167@qq.com/ProgressHUDSwift.git', :tag => s.version.to_s }
+  s.author           = { 'zhenxingliu' => '5210167@qq.com' }
+  s.source           = { :git => 'https://github.com/zhenxingliu/ProgressHUDSwift.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
