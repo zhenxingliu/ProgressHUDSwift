@@ -84,36 +84,36 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
     }
     
     // MARK:- 共有实现方法
-    class func dismiss() {
+    open class func dismiss() {
         self.shared.hudHide()
     }
     
-    class func show(_ status:String?){
+    open class func show(_ status:String?){
         self.shared.interaction = true
         self.shared.hudMake(status, img: nil, spin: true, hide: false)
     }
     
-    class func show(_ status:String?,_ interaction:Bool){
+    open class func show(_ status:String?,_ interaction:Bool){
         self.shared.interaction = interaction
         self.shared.hudMake(status, img: nil, spin: true, hide: false)
     }
     
-    class func showSuccess(_ status:String?){
+    open class func showSuccess(_ status:String?){
         self.shared.interaction = true
         self.shared.hudMake(status, img: HUDConfig.hudImageSuccess, spin: false, hide: true)
     }
     
-    class func showSuccess(_ status:String?,_ interaction:Bool){
+    open class func showSuccess(_ status:String?,_ interaction:Bool){
         self.shared.interaction = interaction
         self.shared.hudMake(status, img: HUDConfig.hudImageSuccess, spin: false, hide: true)
     }
     
-    class func showError(_ status:String?){
+    open class func showError(_ status:String?){
         self.shared.interaction = true
         self.shared.hudMake(status, img: HUDConfig.hudImageError, spin: false, hide: true)
     }
     
-    class func showError(_ status:String?,_ interaction:Bool){
+    open class func showError(_ status:String?,_ interaction:Bool){
         self.shared.interaction = interaction
         self.shared.hudMake(status, img: HUDConfig.hudImageError, spin: false, hide: true)
     }

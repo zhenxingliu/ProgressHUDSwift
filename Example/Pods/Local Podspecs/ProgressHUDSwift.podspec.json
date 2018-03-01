@@ -1,6 +1,6 @@
 {
   "name": "ProgressHUDSwift",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "summary": "使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.",
   "description": "使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.满足Swift使用者使用。",
   "homepage": "https://github.com/zhenxingliu/ProgressHUDSwift",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/zhenxingliu/ProgressHUDSwift.git",
-    "tag": "0.1.1"
+    "tag": "0.1.2"
   },
   "platforms": {
     "ios": "8.0"
