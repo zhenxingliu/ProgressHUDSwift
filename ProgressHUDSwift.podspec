@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ProgressHUDSwift'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = '使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.'
 
 # This description is used to generate tags and improve search results.
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
   s.source_files = 'ProgressHUDSwift/Classes/**/*'
   
   s.resource_bundles = {
-    'ProgressHUDSwift' => ['ProgressHUDSwift/Assets/*.png']
+    'ProgressHUDSwift' => ['ProgressHUDSwift/Assets/**/*']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
