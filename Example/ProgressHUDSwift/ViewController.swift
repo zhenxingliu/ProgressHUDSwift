@@ -86,21 +86,28 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                
+                ProgressSHD.dismiss()
                 break
             case 1:
+                ProgressSHD.show(nil)
                 break
             case 2:
+                ProgressSHD.show("Please wait...")
                 break
             case 3:
+                ProgressSHD.show("Please wait. We need some more time to work out this situation.")
                 break
             case 4:
+                ProgressSHD.showSuccess(nil)
                 break
             case 5:
+                ProgressSHD.showSuccess("That was great!")
                 break
             case 6:
+                ProgressSHD.showError(nil)
                 break
             case 7:
+                ProgressSHD.showError("Something went wrong.")
                 break
             default:
                 break

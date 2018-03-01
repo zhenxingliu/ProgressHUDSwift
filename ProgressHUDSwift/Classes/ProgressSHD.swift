@@ -20,9 +20,15 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         
        static let hudWindowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
         
-       static let hudImageSuccess = #imageLiteral(resourceName: "progresshud-success.png")
+       static var hudImageSuccess:UIImage {
+            let bundle = Bundle.init(for: ProgressSHD.self)
+            return UIImage(named: "ProgressSUD.bundle/progresshud-success", in: bundle, compatibleWith: nil)!
+        }
         
-       static let hudImageError = #imageLiteral(resourceName: "progresshud-error.png")
+        static var  hudImageError:UIImage {
+            let bundle = Bundle.init(for: ProgressSHD.self)
+            return UIImage(named: "ProgressSUD.bundle/progresshud-error", in: bundle, compatibleWith: nil)!
+        }
     }
     
     private var window:UIWindow!
