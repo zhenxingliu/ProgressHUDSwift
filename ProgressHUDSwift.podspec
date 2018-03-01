@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ProgressHUDSwift'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of ProgressHUDSwift.'
+  s.version          = '0.1.1'
+  s.summary          = '使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-                        使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.
+                        使用Swift4改写ProgressHUD，并加入一些自己特定的使用方法.满足Swift使用者使用。
                        DESC
 
   s.homepage         = 'https://github.com/zhenxingliu/ProgressHUDSwift'
