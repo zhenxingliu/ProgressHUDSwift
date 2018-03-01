@@ -10,9 +10,10 @@ import UIKit
 open class ProgressSHD: UICollectionViewLayoutAttributes {
     
     struct HUDConfig {
+        
        static let hudStatusFont = UIFont(name: "PingFangSC-Regular", size: 16)!
         
-       static let hudStatusColor = UIColor.clear
+       static let hudStatusColor = UIColor.black
         
        static let hudSpinnerColor = UIColor(red: 251/255, green: 71/255, blue: 71/255, alpha: 1)
         
@@ -24,12 +25,12 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
     
     private var hudImageSuccess:UIImage {
         let bundle = Bundle(for: ProgressSHD.self)
-        return UIImage(named: "ProgressSUD.bundle/progresshud-success", in: bundle, compatibleWith: nil)!
+        return UIImage(named: "ProgressHUDSwift.bundle/progresshud-success", in: bundle, compatibleWith: nil)!
     }
     
     private var  hudImageError:UIImage {
         let bundle = Bundle(for: ProgressSHD.self)
-        return UIImage(named: "ProgressSUD.bundle/progresshud-error", in: bundle, compatibleWith: nil)!
+        return UIImage(named: "ProgressHUDSwift.bundle/progresshud-error", in: bundle, compatibleWith: nil)!
     }
     
     private var window:UIWindow!
@@ -142,7 +143,7 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         self.hudPosition(nil)
         self.hudShow()
         if hide {
-            Thread.detachNewThreadSelector(#selector(timedHide), toTarget: self, with: nil)
+            self.timedHide()
         }
     }
     
@@ -196,10 +197,6 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         if label.superview == nil {
             hud.addSubview(label)
         }
-        
-        
-        
-        
     }
     
     private func hudSize() {
@@ -229,6 +226,7 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         let center = CGPoint(x: imagex, y: imagey)
         image.center = center
         spinner.center = center
+        label.frame = labelRect
     }
     
     @objc private func hudPosition(_ notification:Notification?){
@@ -282,23 +280,32 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
     
     private func hudDestroy() {
         NotificationCenter.default.removeObserver(self)
-        label.removeFromSuperview()
-        label = nil
-        image.removeFromSuperview()
-        image = nil
-        spinner.removeFromSuperview()
-        spinner = nil
-        hud.removeFromSuperview()
-        hud = nil
-        background.removeFromSuperview()
-        background = nil
+        if label != nil {
+            label.removeFromSuperview()
+            label = nil
+        }
+        if image != nil {
+            image.removeFromSuperview()
+            image = nil
+        }
+        if spinner != nil {
+            spinner.removeFromSuperview()
+            spinner = nil
+        }
+        if hud != nil {
+            hud.removeFromSuperview()
+            hud = nil
+        }
+        if background != nil {
+            background.removeFromSuperview()
+            background = nil
+        }
     }
     
     @objc private func timedHide() {
-        let length:Double = Double(NSString.init(string: label.text!).length)
-        let sleep = length * 0.04 + 0.5
-        Thread.sleep(forTimeInterval: sleep)
-        DispatchQueue.main.async {
+        let sleep = 1 * 0.04 + 0.5
+        let deadlineTime = DispatchTime.now() + sleep
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
             self.hudHide()
         }
     }
@@ -312,10 +319,4 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         
     }
     
-  
-    
-    
-    
-    
-
 }
