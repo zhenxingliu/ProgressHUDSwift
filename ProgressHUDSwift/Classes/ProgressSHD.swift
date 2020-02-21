@@ -4,6 +4,7 @@
 //
 //  Created by 刘振兴 on 2018/2/28.
 //
+//  Updated by Gustavo Claure on 2020/02/21
 
 import UIKit
 
@@ -11,15 +12,15 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
     
     struct HUDConfig {
         
-       static let hudStatusFont = UIFont(name: "PingFangSC-Regular", size: 16)!
+        static let hudStatusFont = UIFont(name: "PingFangSC-Regular", size: 16)!
         
-       static let hudStatusColor = UIColor.black
+        static let hudStatusColor = UIColor.black
         
-       static let hudSpinnerColor = UIColor(red: 251/255, green: 71/255, blue: 71/255, alpha: 1)
+        static let hudSpinnerColor = UIColor(red: 251/255, green: 71/255, blue: 71/255, alpha: 1)
         
-       static let hudBackgroundColor = UIColor(white: 0, alpha: 0.8)
+        static let hudBackgroundColor = UIColor(white: 0, alpha: 0.8)
         
-       static let hudWindowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
+        static let hudWindowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
         
     }
     
@@ -82,7 +83,6 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         self.alpha = 0
     }
     
-    
     /// 单例类
     class var shared:ProgressSHD {
         struct ProgressSHDWrapper {
@@ -126,7 +126,6 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         self.shared.hudMake(status, img: self.shared.hudImageError, spin: false, hide: true)
     }
     
-    
     // MARK:- 私有实现方法
     private func hudMake(_ status:String?,img:UIImage?,spin:Bool,hide:Bool){
         self.hudCreate()
@@ -169,7 +168,7 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         }
         
         if spinner == nil {
-            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: .whiteLarge)
+            spinner = UIActivityIndicatorView.init(style: .whiteLarge)
             spinner.color = HUDConfig.hudSpinnerColor
             spinner.hidesWhenStopped = true
         }
@@ -205,7 +204,7 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         var hudHeight = 100
         
         if label.text != nil {
-            let attributes = [NSAttributedStringKey.font:label.font!]
+            let attributes = [NSAttributedString.Key.font:label.font!]
             let options:NSStringDrawingOptions = [.usesFontLeading,.truncatesLastVisibleLine,.usesLineFragmentOrigin]
             labelRect = NSString.init(string:label.text!).boundingRect(with: CGSize.init(width: 200, height: 300) , options: options, attributes: attributes, context: nil)
             labelRect.origin.x = 12
@@ -234,9 +233,9 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
         var duration:TimeInterval = 0.0
         if let noti = notification {
             let info = noti.userInfo
-            let keyboard:CGRect = info![UIKeyboardFrameEndUserInfoKey] as! CGRect
-            duration = info![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-            if noti.name == NSNotification.Name.UIKeyboardWillShow || noti.name == NSNotification.Name.UIKeyboardDidShow {
+            let keyboard:CGRect = info![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+            duration = info![UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+            if noti.name == UIResponder.keyboardWillShowNotification || noti.name == UIResponder.keyboardDidShowNotification {
                 heightKeyboard = keyboard.size.height
             }
         } else {
@@ -257,7 +256,7 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
             self.alpha = 1
             hud.alpha = 0
             hud.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
-            let options:UIViewAnimationOptions = [.allowUserInteraction,.curveEaseOut]
+            let options:UIView.AnimationOptions = [.allowUserInteraction,.curveEaseOut]
             UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: {
                 self.hud.transform = CGAffineTransform(scaleX: 1/1.4, y: 1/1.4)
                 self.hud.alpha = 1
@@ -267,7 +266,7 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
     
     private func hudHide(){
         if self.alpha == 1 {
-            let options:UIViewAnimationOptions = [.allowUserInteraction,.curveEaseIn]
+            let options:UIView.AnimationOptions = [.allowUserInteraction,.curveEaseIn]
             UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: {
                 self.hud.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.hud.alpha = 0
@@ -311,12 +310,10 @@ open class ProgressSHD: UICollectionViewLayoutAttributes {
     }
     
     private func registerNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: Notification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: Notification.Name.UIKeyboardDidHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: Notification.Name.UIKeyboardDidShow, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hudPosition(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
-    
 }
